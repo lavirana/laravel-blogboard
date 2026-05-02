@@ -1,4 +1,7 @@
-<div>
+<div style="width: 20%;
+    padding: 7px;
+    margin: 7px;
+    display: inline-grid;" >
     <article class="post-card post-card--{{ $size }}">
         @if($post->featured_image)
             <img src="{{ $post->featured_image }}" alt="{{ $post->title }}">

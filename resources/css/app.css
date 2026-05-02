@@ -1,11 +1,323 @@
-@import 'tailwindcss';
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
 
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* Container for the grid if you have multiple */
+.post-card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Hover Effect: The "Lift" */
+.post-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Image Styling */
+.post-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.post-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Body Content */
+.post-card__body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* Badge/Category */
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    width: fit-content;
+}
+
+/* Title Styling */
+.post-card__title {
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    font-weight: 800;
+}
+
+.post-card__title a {
+    text-decoration: none;
+    color: #1a202c;
+    transition: color 0.3s ease;
+}
+
+.post-card__title a:hover {
+    color: #4a5568; /* Or your brand color */
+}
+
+/* Excerpt */
+.post-card__excerpt {
+    color: #718096;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    /* Limit to 3 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Meta Footer */
+.post-card__meta {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid #edf2f7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #a0aec0;
+}
+
+.post-card__meta span:first-child {
+    font-weight: 600;
+    color: #4a5568;
+}
+
+/* Size Modifier - Large */
+.post-card--lg img {
+    height: 300px;
+}
+
+/* Navigation Base */
+.navbar {
+    background: #ffffff;
+    border-bottom: 1px solid #edf2f7;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.nav-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo Styling */
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1a202c;
+    text-decoration: none;
+    letter-spacing: -0.03em;
+}
+
+.nav-logo span {
+    color: #4a5568; /* Or your brand color */
+    font-weight: 400;
+}
+
+/* Links & Buttons */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #4a5568;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover, 
+.nav-links a.active {
+    color: #1a202c;
+}
+
+/* Call to Action Button */
+.nav-btn {
+    background: #1a202c;
+    color: #fff !important;
+    padding: 8px 20px;
+    border-radius: 8px;
+    transition: transform 0.2s ease, background 0.2s ease !important;
+}
+
+.nav-btn:hover {
+    background: #2d3748;
+    transform: translateY(-1px);
+}
+
+/* Responsive Hack */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* You can swap this for a hamburger menu later */
+    }
+}
+
+
+/* Container & General Layout */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.post-single {
+    background: #fff;
+}
+
+/* Hero Header */
+.post-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.post-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #1a202c;
+    line-height: 1.2;
+    margin: 1rem 0;
+    letter-spacing: -0.02em;
+}
+
+.post-meta {
+    font-size: 0.95rem;
+    color: #718096;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.post-meta strong {
+    color: #2d3748;
+}
+
+/* Featured Image */
+.post-image {
+    margin-bottom: 3rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.img-fluid {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Main Content (The Article Body) */
+.post-content {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #2d3748;
+    margin-bottom: 3rem;
+}
+
+.post-content p {
+    margin-bottom: 1.5rem;
+}
+
+/* Tags Section */
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 2rem;
+}
+
+.tag-item {
+    background: #edf2f7;
+    color: #4a5568;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+
+.tag-item:hover {
+    background: #e2e8f0;
+}
+
+/* Comments Section */
+.post-comments {
+    padding-top: 2rem;
+}
+
+.post-comments h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #1a202c;
+}
+
+.comment {
+    background: #f7fafc;
+    padding: 1.25rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    border-left: 4px solid #cbd5e0;
+}
+
+.comment strong {
+    display: block;
+    font-size: 1rem;
+    color: #2d3748;
+    margin-bottom: 0.25rem;
+}
+
+.comment p {
+    margin: 0.5rem 0;
+    color: #4a5568;
+    line-height: 1.5;
+}
+
+.text-muted {
+    font-size: 0.75rem;
+    color: #a0aec0;
+}
+
+/* Horizontal Rule Styling */
+hr {
+    border: 0;
+    border-top: 1px solid #edf2f7;
+    margin: 3rem 0;
 }
