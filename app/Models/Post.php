@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Scopes\PublishedScope;
 
 
 class Post extends Model
@@ -29,7 +30,21 @@ class Post extends Model
     protected $casts = [
         'published_at' => 'datetime',
         'status'       => 'string',
+        //'status'       => PostStatus::class,
+        'published_at' => 'datetime',
+    
     ];
+
+    protected static function booted(): void
+
+{
+    // This scope runs on EVERY Post query automatically
+    static::addGlobalScope(new PublishedScope);
+}
+
+// To bypass the scope:
+// Post::withoutGlobalScope(PublishedScope::class)->get()
+
 
     public function user()
     {
