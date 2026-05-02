@@ -28,6 +28,8 @@ class SendPostPublishedNotification implements ShouldQueue
 
         });
 
+        Mail::to($event->post->user->email)->queue(new PostPublished($event->post));
+
     }
 
 }

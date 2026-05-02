@@ -7,6 +7,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\Post;
+use App\Events\PostPublished;
+use App\Notifications\PostPublishedNotification;
+
 
 class PostPublishedNotification extends Notification implements ShouldQueue
 {
@@ -60,6 +63,18 @@ class PostPublishedNotification extends Notification implements ShouldQueue
            ];
        }
    
+       public function handle(PostPublished $event): void
+    {
+        // Access the post from the event
+        $post = $event->post;
+
+        // 1. Send to the post author
+        $post->user->notify(new PostPublishedNotification($post));
+
+        // 2. Send to a specific email (like an editor)
+        Notification::route('mail', 'editor@example.com')
+            ->notify(new PostPublishedNotification($post));
+    }
 
     /**
      * Get the array representation of the notification.
