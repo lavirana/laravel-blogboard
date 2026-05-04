@@ -12,7 +12,8 @@ class JobListingController extends Controller
      */
     public function index()
     {
-        //
+            $jobListings = JobListing::where('is_active', true);
+            return view('jobs.index', compact('jobListings'));
     }
 
     /**
