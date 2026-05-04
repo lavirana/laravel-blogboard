@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    //
+     function index(){
+        $categories = \App\Models\Category::all();
+        return view('categories.index', compact('categories'));
+     }
 }

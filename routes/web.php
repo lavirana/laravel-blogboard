@@ -28,13 +28,15 @@ Route::resource('jobs', JobListingController::class)->only(['index', 'show']);
 
 Route::resource('jobs.applications', ApplicationController::class)->only(['create', 'store']);
 
+Route::resource('categories', CategoryController::class)->only(['index', 'show']);
+
 // Authenticated routes
 
 Route::middleware('auth')->group(function () {
 
     Route::resource('posts', PostController::class)->except(['index', 'show']);
 
-    Route::resource('categories', CategoryController::class);
+    //Route::resource('categories', CategoryController::class);
 
 });
 

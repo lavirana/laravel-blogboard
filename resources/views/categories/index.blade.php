@@ -1,29 +1,24 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-        @foreach ($jobs as $job)
+        @foreach ($categories as $cat)
         <article class="post-card" style="margin-bottom: 4%;">
             {{-- Job Type Badge --}}
             <div class="post-card__body">
-                <span class="badge" style="background: #4a5568;">
-                    {{ $job->type }}
-                </span>
-    
                 {{-- Job Title --}}
                 <h2 class="post-card__title">
-                    <a href="{{ route('jobs.show', $job) }}">{{ $job->title }}</a>
+                    <a href="{{ route('jobs.show', $cat) }}">{{ $cat->name }}</a>
                 </h2>
     
                 {{-- Company & Location --}}
                 <p class="post-card__excerpt">
-                    <strong>{{ $job->company }}</strong> <br>
-                    {{ $job->location }}
+                    <strong>{{ $cat->description }}</strong> <br>
+                     {{ $cat->color }}
                 </p>
     
                 {{-- Salary & Expiry Meta --}}
                 <div class="post-card__meta">
-                    <span>{{ $job->salary_range }}</span>
-                    <span>Exp: {{ \Carbon\Carbon::parse($job->expires_at)->format('M d') }}</span>
+                    <span>Created At: {{ \Carbon\Carbon::parse($cat->created_at)->format('M d') }}</span>
                 </div>
             </div>
         </article>
